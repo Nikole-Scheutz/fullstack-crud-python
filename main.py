@@ -8,6 +8,7 @@ class JSON:
         
         for i in data:
             print(i);
+
         file.close();
         self.data = data;
 
@@ -22,15 +23,16 @@ class JSON:
 class Noter:
     def __init__(self):
         self.note_list = [];
-
+        self.json = JSON();
 
     def create(self, contents):
-        self.note_list.append(contents);
+        #self.json.data.append(contents);
+        test = {"contents": contents}
+        self.json.data["50"] = test;
     
     def read(self, note):
         try:
-            note = int(note);
-            print(self.note_list[note]);
+            print(self.json.data[f"{note}"]["contents"]);
         except:
             print("ERROR, NOTE NOT IN LIST");
     
@@ -43,14 +45,10 @@ class Noter:
         self.note_list.pop(note);
 
     def list(self):
-        for i, note in enumerate(self.note_list):
-            print("-", i, note);
+        for master_key, i in self.json.data.items():
+            print("-", master_key, i["contents"]);
 
 noter = Noter();
-
-jsonner = JSON();
-jsonner.get_note("1");
-jsonner.save_notes();
 
 while True:
     user_input = input();
