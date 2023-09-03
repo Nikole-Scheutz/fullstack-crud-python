@@ -2,35 +2,35 @@
 
 class Noter:
     def __init__(self):
-        self.notes_list = []
+        self.notes_list = [];
 
-    note_list = []
+    note_list = [];
 
-    def create_note(self, contents):
+    def create(self, contents):
         self.note_list.append(contents);
     
-    def read_note(self, note):
+    def read(self, note):
         try:
             print(self.note_list[note]);
         except:
             print("ERROR, NOTE NOT IN LIST");
     
-    def update_note(self, note, contents):
+    def update(self, note, contents):
         self.note_list[note] = contents;
     
-    def delete_note(self, note):
+    def delete(self, note):
         self.note_list.pop(note);
 
 noter = Noter();
 
-noter.create_note("Hello");
-noter.read_note(0);
+noter.create("Hello");
+noter.read(0);
 
-noter.delete_note(0);
-noter.read_note(0);
+noter.delete(0);
+noter.read(0);
 
-noter.create_note("Hello");
-noter.read_note(0);
+noter.create("Hello");
+noter.read(0);
 
-noter.update_note(0, "HELLO");
-noter.read_note(0);
+noter.update(0, "HELLO");
+noter.read(0);
