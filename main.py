@@ -1,4 +1,23 @@
 #!/usr/bin/python3
+import json
+
+class JSON:
+    def __init__(self):
+        file = open("data.json");
+        data = json.load(file);
+        
+        for i in data:
+            print(i);
+        file.close();
+        self.data = data;
+
+    def get_note(self, number):
+        print(self.data[number]);
+        return self.data[number];
+
+    def save_notes(self):
+        with open("sample.json", "w") as outfile:
+            json.dump(self.data, outfile);
 
 class Noter:
     def __init__(self):
@@ -29,19 +48,9 @@ class Noter:
 
 noter = Noter();
 
-noter.create("Hello");
-noter.read(0);
-
-noter.delete(0);
-noter.read(0);
-
-noter.create("Hello");
-noter.read(0);
-
-noter.update(0, "HELLO");
-noter.read(0);
-
-noter.delete(0);
+jsonner = JSON();
+jsonner.get_note("1");
+jsonner.save_notes();
 
 while True:
     user_input = input();
