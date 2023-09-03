@@ -1,30 +1,36 @@
 #!/usr/bin/python3
 
-notes = [];
+class Noter:
+    def __init__(self):
+        self.notes_list = []
 
-def create_note(contents, note_list):
-    note_list.append(contents);
+    note_list = []
 
-def read_note(note, note_list):
-    try:
-        print(note_list[note]);
-    except:
-        print("ERROR, NOTE NOT IN LIST");
+    def create_note(self, contents):
+        self.note_list.append(contents);
+    
+    def read_note(self, note):
+        try:
+            print(self.note_list[note]);
+        except:
+            print("ERROR, NOTE NOT IN LIST");
+    
+    def update_note(self, note, contents):
+        self.note_list[note] = contents;
+    
+    def delete_note(self, note):
+        self.note_list.pop(note);
 
-def update_note(note, note_list, contents):
-    note_list[note] = contents;
+noter = Noter();
 
-def delete_note(note, note_list):
-    note_list.pop(note);
+noter.create_note("Hello");
+noter.read_note(0);
 
-create_note("Hello", notes);
-read_note(0, notes);
+noter.delete_note(0);
+noter.read_note(0);
 
-delete_note(0, notes);
-read_note(0, notes);
+noter.create_note("Hello");
+noter.read_note(0);
 
-create_note("Hello", notes);
-read_note(0, notes);
-
-update_note(0, notes, "HELLO");
-read_note(0, notes);
+noter.update_note(0, "HELLO");
+noter.read_note(0);
