@@ -5,7 +5,7 @@ class JSON:
     def __init__(self):
         file = open("data.json");
         data = json.load(file);
-        
+
         for i in data:
             print(i);
 
@@ -17,7 +17,7 @@ class JSON:
         return self.data[number];
 
     def save_notes(self):
-        with open("sample.json", "w") as outfile:
+        with open("data.json", "w") as outfile:
             json.dump(self.data, outfile);
 
 class Noter:
@@ -26,23 +26,22 @@ class Noter:
         self.json = JSON();
 
     def create(self, contents):
-        #self.json.data.append(contents);
-        test = {"contents": contents}
-        self.json.data["50"] = test;
-    
+        test = {"contents": contents};
+        id = int(list(self.json.data.keys())[-1]) + 1;  # set id of note to one more than last
+        self.json.data[f"{id}"] = test;
+
     def read(self, note):
         try:
             print(self.json.data[f"{note}"]["contents"]);
         except:
             print("ERROR, NOTE NOT IN LIST");
-    
+
     def update(self, note, contents):
         note = int(note);
         self.note_list[note] = contents;
-    
+
     def delete(self, note):
-        note = int(note);
-        self.note_list.pop(note);
+        self.json.data.pop(f"{note}");
 
     def list(self):
         for master_key, i in self.json.data.items():
@@ -75,9 +74,7 @@ while True:
 
         case "delete":
             note = input("Delete which note?\n");
-            note = int(note);
-            if 0 <= note < len(noter.note_list):
-                noter.delete(note);
+            noter.delete(note);
             pass;
 
         case "list":
