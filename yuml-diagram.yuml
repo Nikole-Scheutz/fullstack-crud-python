@@ -22,7 +22,7 @@ title, contents); +delete_note(note_id)]
 [Services]-[NoteService]
 [Services]-[AuthService]
 
-[NoteService|+create_note(user_id, title, contents); +get_note(note_id); +get_notes(user_id); +edit_note(user_id, note_id, title, contents); +delete_note(note_id)]
+[NoteService|+create_note(user_id, title, contents); +get_note(note_id); +get_notes(user_id); +edit_note(note_id, title, contents); +delete_note(note_id)]
 
 [AuthService|+create_user(username, password); +get_user(user_id); +get_users(); +update_user(user_id, username, password); +delete_user(user_id); +login_user(username, password); +logout_user(user_id)]
 
