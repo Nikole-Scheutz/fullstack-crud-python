@@ -5,6 +5,8 @@ from flask import request
 app = FastAPI()
 
 # Controller
+# TODO: move into class
+# class should have fields: NotesService, AuthService, App
 @app.route('/api/notes', methods=["GET", "POST"])
 def controller_notes():
     request_data = request.get_data()
@@ -33,7 +35,25 @@ def controller_auth():
 
 
 # Service
-# TODO
+# TODO: create all needed empty methods
+# figure out what methods need what input
+class NotesService:
+    def __init__(self):
+        return NotesService
+    
+    def get_note(self, request_data):
+        pass
+    
+    def get_notes(self, request_data):
+        pass
+    
+    def create_note(self, request_data):
+        pass
+
+# TODO: implement empty methods for auth
+# figure out what methods need what input
+class AuthService:
+    pass
 
 
 # Repository
