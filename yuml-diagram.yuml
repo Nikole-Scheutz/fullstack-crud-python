@@ -1,0 +1,45 @@
+[database]
+[database]-[note]
+[database]-[user]
+
+[note|note_id: int (pk,u,ai); title: string (u); content: string ; user_id: int (fk);]
+
+[user|user_id: int (pk,u,ai); username: string (u); password: string]
+
+
+[Repository]
+[Repository]-[NoteRepository]
+[Repository]-[UserRepository]
+
+[NoteRepository| +create_note(user_id, title
+contents); +get_note(note_id); +get_notes(user_id); +edit_note(note_id
+title, contents); +delete_note(note_id)]
+
+[UserRepository| +create_user(username, password); +get_user(user_id); +get_users(); +edit_user(user_id, username, password); +delete_user(user_id)]
+
+
+[Services]
+[Services]-[NoteService]
+[Services]-[AuthService]
+
+[NoteService|+create_note(user_id, title, contents); +get_note(note_id); +get_notes(user_id); +edit_note(user_id, note_id, title, contents); +delete_note(note_id)]
+
+[AuthService|+create_user(username, password); +get_user(user_id); +get_users(); +update_user(user_id, username, password); +delete_user(user_id); +login_user(username, password); +logout_user(user_id)]
+
+
+[Controller]
+[/api/notes]
+[/api/notes/\<id\>]
+[/api/auth]
+[/api/auth/\<username\>]
+
+[Controller]-[/api/notes]
+[/api/notes]-[/api/notes/\<id\>]
+[Controller]-[/api/auth]
+[/api/auth]-[/api/auth/\<username\>]
+
+[/api/notes| GET - get notes; POST - add note]
+[/api/notes/\<id\>| GET - get note; PUT - edit note; DELETE - delete note]
+
+[/api/auth| GET - get users; POST - add user]
+[/api/auth/\<username\>| POST - log in; PUT - edit user; DELETE - delete user]
