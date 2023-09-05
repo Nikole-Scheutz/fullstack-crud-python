@@ -25,13 +25,13 @@ def controller_specific_note(id):
     elif request.method == "DELETE":
         return service_delete_note(request_data)
 
-@app.route('/api/auth/:<username>', methods=["GET", "POST"])
-def controller_auth():
-    request_data = request.get_data()
-    if request.method == "POST":
-        return service_login(request_data)
-    else:
-        return service_login_prompt(request_data)
+#@app.route('/api/auth/:<username>', methods=["GET", "POST"])
+#def controller_auth():
+#    request_data = request.get_data()
+#    if request.method == "POST":
+#        return service_login(request_data)
+#    else:
+#        return service_login_prompt(request_data)
 
 
 # Service
