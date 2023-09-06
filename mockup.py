@@ -1,99 +1,56 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from flask import request
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+from sqlalchemy import Integer, String, Column, ForeignKey
 
-app = FastAPI()
+SQLALCHEMY_DATABASE_URL = 'sqlite:///mydb.db'
 
-# Controller
-# TODO: move into class
-# class should have fields: NotesService, AuthService, App
-@app.route('/api/notes', methods=["GET", "POST"])
-def controller_notes():
-    request_data = request.get_data()
-    if request.method == "GET":
-        return service_get_notes(request_data)
-    elif request.method == "POST":
-        return service_create_note(request_data)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-@app.route('/api/notes/:<id>', methods=["GET", "PUT", "DELETE"])
-def controller_specific_note(id):
-    request_data = request.get_data()
-    if request.method == "GET":
-        return service_get_note(request_data)
-    elif request.method == "PUT":
-        return service_edit_note(request_data)
-    elif request.method == "DELETE":
-        return service_delete_note(request_data)
+Base = declarative_base()
 
-#@app.route('/api/auth/:<username>', methods=["GET", "POST"])
-#def controller_auth():
-#    request_data = request.get_data()
-#    if request.method == "POST":
-#        return service_login(request_data)
-#    else:
-#        return service_login_prompt(request_data)
+class User(Base):
+    __tablename__ = "users"
+    user_id =  Column(Integer, primary_key=True, auto_increment=True, unique=True)
+    username = Column(String, unique=True)
+    password = Column(String)
 
+    notes = relationship("Note", back_populates="owner")
 
-# Service
-# TODO: create all needed empty methods
-# figure out what methods need what input
-class NotesService:
+    def __init__(self, username, password):
+        self = User(username, password)
+
+class Note(Base):
+    __tablename__ = "notes"
+    note_id = Column(Integer, primary_key=True, auto_increment=True, unique=True)
+    title = Column(String, unique=True)
+    content = Column(String)
+
+    user_id = Column(Integer, ForeignKey("users.user_id"))
+    owner = relationship("User", back_populates="notes")
+
+    def __init__(self, user_id, title, contents):
+        self = Note(user_id, title, contents)
+
+class UserRepo(SQLRepo):
     def __init__(self):
-        return NotesService
-    
-    def get_note(self, request_data):
-        pass
-    
-    def get_notes(self, request_data):
-        pass
-    
-    def create_note(self, request_data):
-        pass
+        SQLRepo(model_orm=User, engine=engine)
 
-# TODO: implement empty methods for auth
-# figure out what methods need what input
-class AuthService:
-    pass
+class NoteRepo(SQLRepo):
+    def __init__(self):
+        self = SQLRepo(model_orm=Note, engine=engine, table="notes")
 
+    def create_note(self, user_id, title, contents):
+        self.add(Note(user_id, title, contents))
 
-# Repository
-def get_notes(): #get ALL notes
-    pass
+    def get_note(self, note_id):
+        return self.filter_by(note_id = note_id)
 
-def get_note(note_id): #get a single note
-    pass
+    #def edit_note(self, input = {"note_id": Integer, "title": String, "contents": String}):
+    #    current_note = self.get_note(input["note_id"])
+    #    current_note.update(title = input["title"])
 
-def create_note(user_id, title, contents): #create a note for a user
-    pass
+noterepo = NoteRepo()
 
-def edit_note(note_id, contents):
-    note = get_note(note_id)
-    note["contents"] = contents
-    pass
+noterepo.create_note(1, "TITLE", "CONTENTS")
 
-def delete_note(note_id):
-    pass
-
-#User specific things
-def create_user(username, password):
-    pass
-
-def delete_user(user_id):
-    user_notes = get_user_notes(user_id)
-    for note in user_notes:
-        delete_note(note.note_id)
-    #then actually delete the user
-    pass
-
-def get_user(user_id):
-    pass
-
-def get_user_notes(user_id): #get notes USER has access to
-    pass
-
-
-#X Am I done with repo methods? 
-#X Do I need more service methods?
-#Freaking json-dictionaries
-#How to connect service methods with repo methods?
-#How will React react?
