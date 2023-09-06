@@ -22,6 +22,11 @@ def get_note(note_id: int, db: Session = Depends(get_db)):
     note = repository.get_note(db, note_id)
     return note
 
+@app.get("/note/user/{user_id}", response_model=list[schemas.Note])
+def get_notes(user_id: int, db: Session = Depends(get_db)):
+    notes = repository.get_notes(db, user_id)
+    return notes
+
 @app.post("/note/", response_model=schemas.Note)
 def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
     return repository.create_note(db, note)
