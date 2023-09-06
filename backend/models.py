@@ -2,8 +2,6 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from . database import Base
-from . database import SessionLocal
-
 
 class User(Base):
     __tablename__ = "users"
@@ -12,9 +10,6 @@ class User(Base):
     password = Column(String)
 
     notes = relationship("Note", back_populates="owner")
-
-#    def __init__(self, username, password):
-#        self = User(username, password)
 
 class Note(Base):
     __tablename__ = "notes"

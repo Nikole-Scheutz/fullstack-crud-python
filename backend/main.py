@@ -5,11 +5,9 @@ from sqlalchemy.orm.decl_api import MetaData
 from . import repository, models, schemas
 from .database import SessionLocal, engine
 
-models.Base.metadata.create_all(bind=engine)
-
+models.Base.metadata.create_all(bind=engine) # THIS SHOWS AN ERROR, BUT SEEMS TO WORK ANYWAYS
 
 app = FastAPI()
-
 
 # Dependency
 def get_db():
