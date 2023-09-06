@@ -1,0 +1,21 @@
+1: remove user_id from request body in almost all cases
+    - it should be in the path already
+
+2: figure out why the repository methods that call db.query are considered null but still work
+    - LSP problems? or actual risk of null?
+    - it's driving me insane, makes it difficult to see if something actually is wrong
+
+3: update yuml diagram to most up-to-date version
+    - set up github action that automatically generates a new image based on yuml-file?
+
+4: fix style of all files
+    - pep-8? some sort of linting is required...
+
+5: separate controller from services
+    - populate the service directory
+
+6: separate controller domains
+    - NoteController | UserController
+
+7: separate repository domains
+    - NoteRepository | UserRepository
