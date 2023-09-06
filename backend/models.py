@@ -1,7 +1,8 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from . database import Base
+from . database import SessionLocal
 
 
 class User(Base):
@@ -24,5 +25,3 @@ class Note(Base):
     user_id = Column(Integer, ForeignKey("users.user_id"))
     owner = relationship("User", back_populates="notes")
 
-#    def __init__(self, user_id, title, contents):
-#        self = Note(user_id, title, contents)
