@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
-
 def create_note(db: Session, note: schemas.NoteCreate):
     db_item = models.Note(**note.dict())
     db.add(db_item)
@@ -36,3 +35,4 @@ def delete_note(db: Session, note_id: int):
         return False
     db.delete(note)
     return db.commit()
+

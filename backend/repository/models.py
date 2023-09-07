@@ -11,6 +11,7 @@ class User(Base):
 
     notes = relationship("Note", back_populates="owner")
 
+
 class Note(Base):
     __tablename__ = "notes"
     note_id = Column(Integer, primary_key=True, unique=True, nullable=False)
