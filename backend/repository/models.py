@@ -14,7 +14,7 @@ class User(Base):
 class Note(Base):
     __tablename__ = "notes"
     note_id = Column(Integer, primary_key=True, unique=True, nullable=False)
-    title = Column(String, unique=True, nullable=False)
+    title = Column(String, nullable=False)
     content = Column(String, nullable=False)
 
     user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
