@@ -1,9 +1,12 @@
 1: remove user_id from request body in almost all cases
     - it should be in the path already
 
-2: figure out why the repository methods that call db.query are considered null but still work
-    - LSP problems? or actual risk of null?
-    - it's driving me insane, makes it difficult to see if something actually is wrong
+X 2: figure out why the repository methods that call db.query are considered null but still work
+    X- LSP problems? or actual risk of null?
+    X- it's driving me insane, makes it difficult to see if something actually is wrong
+    SOLUTION - install `sqlalchemy-stubs` library
+        - next problem: different part of repository method is screaming
+        SOLUTION - f-string the keys of the update methods
 
 3: update yuml diagram to most up-to-date version
     - set up github action that automatically generates a new image based on yuml-file?

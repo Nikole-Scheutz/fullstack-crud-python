@@ -5,7 +5,8 @@ from sqlalchemy.orm.decl_api import MetaData
 from .repository import repository, models, schemas
 from .repository.database import SessionLocal, engine
 
-models.Base.metadata.create_all(bind=engine) # THIS SHOWS AN ERROR, BUT SEEMS TO WORK ANYWAYS
+# THIS SHOWS AN ERROR, BUT SEEMS TO WORK ANYWAYS
+models.Base.metadata.create_all(bind=engine) 
 
 app = FastAPI()
 
