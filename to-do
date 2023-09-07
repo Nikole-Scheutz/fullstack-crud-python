@@ -7,6 +7,7 @@ X 2: figure out why the repository methods that call db.query are considered nul
     SOLUTION - install `sqlalchemy-stubs` library
         - next problem: different part of repository method is screaming
         SOLUTION - f-string the keys of the update methods
+            ADDENDUM - that was not the case, just put the key names as string fixes it
 
 3: update yuml diagram to most up-to-date version
     - set up github action that automatically generates a new image based on yuml-file?
