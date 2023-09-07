@@ -12,7 +12,7 @@ def create_note(db: Session, note: schemas.NoteCreate):
 def get_note(db: Session, note_id: int):
     return db.query(models.Note).filter(models.Note.note_id == note_id).one()
 
-def get_notes(db: Session, user_id: int):
+def get_notes(db: Session, user_id: int) -> list[models.Note]:
     assert db.query(models.Note) is not None
     return db.query(models.Note).filter(models.Note.user_id == user_id).all()
 

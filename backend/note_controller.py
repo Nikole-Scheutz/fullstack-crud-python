@@ -9,7 +9,6 @@ from .repository.database import engine, SessionLocal
 from .repository import note_repository
 
 
-# THIS SHOWS AN ERROR, BUT SEEMS TO WORK ANYWAYS
 models.Base.metadata.create_all(bind=engine) 
 
 app = FastAPI()
