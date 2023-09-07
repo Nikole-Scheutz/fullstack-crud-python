@@ -32,7 +32,7 @@ def get_notes(user_id: int, db: Session = Depends(get_db)):
     notes = note_repository.get_notes(db, user_id)
     return notes
 
-@app.post("/notes/", response_model=schemas.Note)
+@app.post("/api/notes/", response_model=schemas.Note)
 def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
     return note_repository.create_note(db, note)
 
