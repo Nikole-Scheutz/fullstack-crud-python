@@ -35,3 +35,8 @@ def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
 @app.put("/api/notes/{note_id}", response_model=schemas.Note)
 def edit_note(note_id: int, note: schemas.Note, db: Session = Depends(get_db)):
     return repository.edit_note(db, note_id, note)
+
+@app.delete("/api/notes/{note_id}")
+def delete_note(note_id: int, db: Session = Depends(get_db)):
+    repository.delete_note(db, note_id)
+

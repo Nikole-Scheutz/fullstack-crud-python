@@ -11,7 +11,7 @@ def create_note(db: Session, note: schemas.NoteCreate):
     return db_item
 
 def get_note(db: Session, note_id: int):
-    return db.query(models.Note).filter(models.Note.note_id == note_id).first()
+    return db.query(models.Note).filter(models.Note.note_id == note_id).one()
 
 def get_notes(db: Session, user_id: int):
     assert db.query(models.Note) is not None
@@ -30,3 +30,9 @@ def edit_note(db: Session, note_id: int, note: schemas.Note):
     db.commit()
     return db.query(models.Note).filter(models.Note.note_id == note_id).first()
     
+def delete_note(db: Session, note_id: int):
+    note = get_note(db, note_id)
+    if type(note) == None:
+        return False
+    db.delete(note)
+    return db.commit()
