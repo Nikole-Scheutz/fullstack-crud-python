@@ -20,9 +20,9 @@ def edit_note(db: Session, note_id: int, note: schemas.Note):
     db.query(models.Note)\
             .filter(models.Note.note_id == note_id)\
             .update({
-                f"{models.Note.title}": note.title,
-                f"{models.Note.content}": note.content,
-                f"{models.Note.user_id}": note.user_id,
+                "title": note.title,
+                "content": note.content,
+                "user_id": note.user_id,
                 },
                 synchronize_session="evaluate"
                 )
