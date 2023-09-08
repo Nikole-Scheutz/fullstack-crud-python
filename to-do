@@ -15,7 +15,7 @@ X 2: figure out why the repository methods that call db.query are considered nul
 4: fix style of all files
     - pep-8? some sort of linting is required...
 
-5: separate controller from services
+X 5: separate controller from services
     - populate the service directory
 
 6: separate controller domains
