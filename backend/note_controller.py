@@ -61,7 +61,6 @@ def edit_note(note_id: int, note: schemas.Note, response: Response, db: Session 
         return edited_note
 
     except Exception as error:
-        print(str(error))
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = str(error))
 
 

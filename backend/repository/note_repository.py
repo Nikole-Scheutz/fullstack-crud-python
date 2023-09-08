@@ -49,7 +49,6 @@ def edit_note(db: Session, note_id: int, note: schemas.Note):
         return db.query(models.Note).filter(models.Note.note_id == note_id).first()
     
     except Exception as error:
-        print(error)
         error_string = f"Edit error: {error}"
         raise Exception(error_string)
 

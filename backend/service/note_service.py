@@ -35,7 +35,6 @@ def edit_note(note_id: int, new_note: schemas.Note, db: Session) -> schemas.Note
         return edited_note
 
     except Exception as error:
-        print(str(error))
         raise error
 
 
