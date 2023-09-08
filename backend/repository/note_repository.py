@@ -9,8 +9,11 @@ def create_note(db: Session, note: schemas.NoteCreate):
     db.refresh(db_item)
     return db_item
 
-def get_note(db: Session, note_id: int):
-    return db.query(models.Note).filter(models.Note.note_id == note_id).one()
+def get_note(db: Session, note_id: int) -> schemas.Note | Exception:
+    try:
+        return db.query(models.Note).filter(models.Note.note_id == note_id).one()
+    except Exception as error:
+        raise Exception(type(error).__name__)
 
 def get_notes(db: Session, user_id: int) -> list[models.Note]:
     assert db.query(models.Note) is not None

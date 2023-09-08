@@ -5,9 +5,12 @@ from ..repository import note_repository
 from sqlalchemy.orm import Session
 
 
-def get_note(note_id: int, db: Session) -> schemas.Note:
-    note = note_repository.get_note(db, note_id)
-    return note
+def get_note(note_id: int, db: Session) -> schemas.Note | Exception:
+    try:
+        note = note_repository.get_note(db, note_id)
+        return note
+    except Exception as error:
+        raise error
 
 def get_notes(user_id: int, db: Session) -> list[models.Note]:
     return note_repository.get_notes(db, user_id)
