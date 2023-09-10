@@ -1,0 +1,25 @@
+#!/bin/bash
+
+NAME=crud-backend
+DIR=/home/nikole/pyvenv/fullstack-crud-python
+USER=nikole
+GROUP=nikole
+WORKERS=3
+WORKER_CLASS=uvicorn.workers.UvicornWorker
+VENV=$DIR/../bin/activate
+BIND=unix:$DIR/backend/run/gunicorn.sock
+LOG_LEVEL=debug
+
+cd $DIR
+source $VENV
+
+exec gunicorn backend.note_controller:app \
+    --name $NAME \
+    --workers $WORKERS \
+    --worker-class $WORKER_CLASS \
+    --user=$USER \
+    --group=$GROUP \
+    --bind=$BIND \
+    --log-level=$LOG_LEVEL \
+    --log-file=/var/log/fullstack-crud-python/gunicorn.log
+

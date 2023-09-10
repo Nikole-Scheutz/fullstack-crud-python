@@ -1,7 +1,19 @@
-1: remove user_id from request body in almost all cases
+1: move gunicorn files into ./backend_config/, or into backend/config/
+    - fix on actual server
+    - make a script that puts each file in the correct place?
+        - big script, would need tons of user configuration
+          unfeasible? not sure...
+
+2: figure out how to separate more nginx servers/routes into separate files
+    - better way than this... symlink into correct places?
+    - document symlinks
+        - document everything...
+        - add readme, should maybe be first..
+
+3: remove user_id from request body in almost all cases
     - it should be in the path already
 
-X 2: figure out why the repository methods that call db.query are considered null but still work
+X 4: figure out why the repository methods that call db.query are considered null but still work
     X- LSP problems? or actual risk of null?
     X- it's driving me insane, makes it difficult to see if something actually is wrong
     SOLUTION - install `sqlalchemy-stubs` library
@@ -9,17 +21,17 @@ X 2: figure out why the repository methods that call db.query are considered nul
         SOLUTION - f-string the keys of the update methods
             ADDENDUM - that was not the case, just put the key names as string fixes it
 
-3: update yuml diagram to most up-to-date version
+5: update yuml diagram to most up-to-date version
     - set up github action that automatically generates a new image based on yuml-file?
 
-4: fix style of all files
+6: fix style of all files
     - pep-8? some sort of linting is required...
 
-X 5: separate controller from services
+X 7: separate controller from services
     - populate the service directory
 
-6: separate controller domains
+8: separate controller domains
     - NoteController | UserController
 
-7: separate repository domains
+9: separate repository domains
     - NoteRepository | UserRepository
